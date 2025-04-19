@@ -32,6 +32,7 @@ public class UsuarioDAO {
         }
         return users;
     }
+
     public Usuario GetUsuarioById(int id) throws SQLException {
         Usuario user = null;
         String query = "SELECT id_usuario, nombre, apellidos, email, rol, password FROM usuarios WHERE id_usuario = ?";
@@ -52,6 +53,7 @@ public class UsuarioDAO {
         }
         return user;
     }
+
     public boolean AddUsuario(Usuario Usuario) throws SQLException {
         String passwordHash = BCrypt.hashpw(Usuario.getPassword(), BCrypt.gensalt());
         String query = "INSERT INTO Usuarios (nombre, apellidos, email, rol, password) VALUES (?, ?, ?, ?, ?)";
@@ -68,6 +70,7 @@ public class UsuarioDAO {
         int rows = ps.executeUpdate();
         return rows > 0;
     }
+
     public boolean UpdateUsuario(Usuario Usuario) throws SQLException {
         String query = "UPDATE usuarios SET nombre = ?, apellidos = ?, email = ?, rol = ?, password = ? WHERE id_usuario = ?";
 
@@ -83,6 +86,7 @@ public class UsuarioDAO {
         int rows = ps.executeUpdate();
         return rows > 0;
     }
+
     public boolean DeleteUsuario(int id) throws SQLException {
 
         String query = "DELETE FROM usuarios WHERE id_usuario = ?";

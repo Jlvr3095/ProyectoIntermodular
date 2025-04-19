@@ -1,6 +1,6 @@
 
 <%@ page import="com.inventario.empresa_catering.models.Usuario" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <%
   Usuario usuario = (Usuario) request.getAttribute("usuario");
   boolean isEdit = (usuario != null);

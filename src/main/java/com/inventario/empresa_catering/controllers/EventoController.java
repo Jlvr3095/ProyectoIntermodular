@@ -64,7 +64,7 @@ public class EventoController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws IOException {
 
         String action = request.getParameter("action");
 
@@ -177,7 +177,7 @@ public class EventoController extends HttpServlet {
     }
 
     private void deleteEvento(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws  IOException {
 
         int idEvento = Integer.parseInt(request.getParameter("id"));
         String rol = (String) request.getSession().getAttribute("rol");

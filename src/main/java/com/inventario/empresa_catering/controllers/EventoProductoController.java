@@ -51,7 +51,7 @@ public class EventoProductoController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws IOException {
 
         String action = request.getParameter("action");
 
@@ -62,7 +62,6 @@ public class EventoProductoController extends HttpServlet {
         }
     }
 
-    // Mostrar formulario para agregar productos a un evento
     private void showAddForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -82,7 +81,6 @@ public class EventoProductoController extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-    // Listar productos asociados a un evento
     private void listProductosByEvento(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -102,7 +100,6 @@ public class EventoProductoController extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-    // Agregar un producto a un evento
     private void addProductoToEvento(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
 
@@ -120,7 +117,6 @@ public class EventoProductoController extends HttpServlet {
         response.sendRedirect("evento?action=listCliente"); // Redirigir al listado de eventos para el cliente
     }
 
-    // Eliminar un producto de un evento
     private void deleteProductoFromEvento(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
 
@@ -136,7 +132,6 @@ public class EventoProductoController extends HttpServlet {
         response.sendRedirect("evento?action=listCliente"); // Redirigir al listado de eventos para el cliente
     }
 
-    // Método para mostrar todos los productos
     private void showProductList(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 

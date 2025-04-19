@@ -1,4 +1,5 @@
 package com.inventario.empresa_catering.DB.DAO;
+
 import com.inventario.empresa_catering.DB.DataBaseConnector;
 import com.inventario.empresa_catering.models.Evento;
 import java.sql.Connection;
@@ -9,8 +10,6 @@ import java.util.ArrayList;
 
 
 public class EventoDAO {
-
-    Connection conn = DataBaseConnector.GetInstance().GetConnection();
 
     public ArrayList<Evento> GetAllEventos() throws SQLException {
 
@@ -86,7 +85,7 @@ public class EventoDAO {
 
         String query = "INSERT INTO Eventos (nombre_evento, fecha_evento, lugar_evento, id_usuario) VALUES (?, ?, ?,?)";
 
-        conn = DataBaseConnector.GetInstance().GetConnection();
+        Connection conn = DataBaseConnector.GetInstance().GetConnection();
         PreparedStatement ps = conn.prepareStatement(query);
 
         ps.setString(1, Evento.getNombre_evento());

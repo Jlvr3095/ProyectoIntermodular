@@ -29,7 +29,7 @@
         <p>
             <label>Fecha del evento</label><br />
             <input type="date" name="fecha_evento"
-                value=" <%= isEdit ? evento.getFecha_evento() : "" %>" required />
+                value="<%= isEdit ? evento.getFecha_evento() : "" %>" required />
         </p>
         <p>
             <label>Lugar del evento</label><br/>
