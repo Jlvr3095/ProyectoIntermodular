@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="bienvenidaCliente.css">
     <title>Pagina Principal del cliente</title>
 </head>
+<p>
+    <a href="index.jsp" title="Cerrar sesion">Cerrar sesion</a>
+</p>
 <body>
 <header>
     <h1>Bienvenid@, ${sessionScope.nombre}</h1>

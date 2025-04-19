@@ -9,6 +9,9 @@
     <title>Pagina de administrador</title>
 </head>
 <body>
+<p>
+    <a href="index.jsp" title="Cerrar sesion">Cerrar sesion</a>
+</p>
 <h1>Bienvenid@, ${sessionScope.nombre}</h1>
 <div class="container">
     <h2> Lista de usuarios registrados</h2>
