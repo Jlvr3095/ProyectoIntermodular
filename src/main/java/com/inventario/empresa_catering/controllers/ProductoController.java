@@ -73,7 +73,7 @@ public class ProductoController extends HttpServlet {
         }
         request.setAttribute("ListaProductos", productos);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("lista_eventos.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("usuario?action=list");
         dispatcher.forward(request, response);
     }
     private void newProduct(HttpServletRequest request, HttpServletResponse response)

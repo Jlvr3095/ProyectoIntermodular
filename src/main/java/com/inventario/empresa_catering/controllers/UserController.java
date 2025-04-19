@@ -70,6 +70,7 @@ public class UserController extends HttpServlet {
             e.printStackTrace();
         }
         request.setAttribute("listaUsuarios", usuarios);
+
         RequestDispatcher dispatcher = request.getRequestDispatcher("lista_eventos.jsp");
         dispatcher.forward(request, response);
     }
@@ -147,7 +148,7 @@ public class UserController extends HttpServlet {
             e.printStackTrace();
         }
 
-        response.sendRedirect("usuario?action=list");
+        response.sendRedirect("evento?action=list");
     }
 }
 

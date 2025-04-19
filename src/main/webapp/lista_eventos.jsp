@@ -1,6 +1,7 @@
 <%@ page import="com.inventario.empresa_catering.models.Evento" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.inventario.empresa_catering.models.Producto" %>
+<%@ page import="com.inventario.empresa_catering.models.Usuario" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -9,8 +10,44 @@
 </head>
 <body>
 <h1>Bienvenido, ${sessionScope.nombre}</h1>
+
 <div class="container">
-    <h2>Listado de Eventos</h2>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Rol</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <%
+            // Obtener lista de usuarios
+            List<Usuario> usuarios = (List<Usuario>) request.getAttribute("listaUsuarios");
+            if (usuarios != null) {
+                for (Usuario usuario : usuarios) {
+        %>
+        <tr>
+            <td><%= usuario.getId_usuario() %></td>
+            <td><%= usuario.getNombre() + " " + usuario.getApellidos() %></td>
+            <td><%= usuario.getEmail() %></td>
+            <td><%= usuario.getRol() %></td>
+            <td>
+                <a href="usuario?action=edit&id=<%= usuario.getId_usuario() %>">Editar</a>
+                <a href="usuario?action=delete&id=<%= usuario.getId_usuario() %>" onclick="return confirm('¿Seguro que quieres eliminar este usuario?')">Eliminar</a>
+            </td>
+        </tr>
+        <%
+                }
+            }
+        %>
+        </tbody>
+    </table>
+</div>
+<div class="container">
+    <h2>Lista de eventos creados</h2>
     <table>
         <tr>
             <th>Nombre</th>
@@ -38,7 +75,7 @@
     </table>
 </div>
 <div class="container">
-    <h2>Listado de Productos</h2>
+    <h2>Productos disponibles para eventos</h2>
     <table>
         <tr>
             <th>Nombre producto</th>
