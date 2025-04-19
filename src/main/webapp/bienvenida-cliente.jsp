@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="bienvenidaCliente.css">
 </head>
 <body>
-<h1>Bienvenido, ${sessionScope.nombre}</h1>
+<h1>Bienvenid@, ${sessionScope.nombre}</h1>
 <div class="container">
     <h2>Estos son los eventos que tienes</h2>
     <table>

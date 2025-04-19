@@ -23,23 +23,23 @@
     <% } %>
 
     <p>
-      <label>Nombre:</label><br />
+      <label>Nombre</label><br />
       <input type="text" name="nombre"
              value="<%= isEdit ? usuario.getNombre(): "" %>" required />
     </p>
 
     <p>
-      <label>Apellidos:</label><br />
+      <label>Apellidos</label><br />
       <input type="text" name="apellidos"
                 value="<%= isEdit ? usuario.getApellidos(): "" %>" required />
     </p>
     <p>
-      <label>Correo electronico:</label><br />
+      <label>Correo electronico</label><br />
       <input type="email" name="email"
                 value="<%= isEdit ? usuario.getEmail(): "" %>" required />
     </p>
     <p>
-      <label>Contraseña:</label><br />
+      <label>Contraseña</label><br />
       <input type="password" name="password" minlength="7"
                 value="<%= isEdit ? usuario.getPassword(): "" %>" required />
     </p>

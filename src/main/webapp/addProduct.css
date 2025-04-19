@@ -51,10 +51,12 @@ select, input[type="text"], input[type="date"] {
     margin-bottom: 20px;
     border: 2px solid #3498db;
     border-radius: 8px;
+    field-sizing: content;
     outline: none;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
     width: 100%; /* Para que ocupe todo el espacio disponible */
     max-width: 500px; /* Limitar el tamaño máximo */
+    text-align: center;
 }
 
 /* Efecto al hacer foco en los inputs */
@@ -89,6 +91,7 @@ button:hover {
     color: #ecf0f1;
     margin-top: 10px;
     font-weight: 500;
+    field-sizing: content;
 }
 
 /* Enlace para regresar */

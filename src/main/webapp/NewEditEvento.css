@@ -1,12 +1,10 @@
 /* Estilos generales para el body */
 body {
-    font-family: 'Arial', sans-serif;
-    background-image: url('imagenes/finca.jpg');
+    font-family: 'Playfair Display', serif;
+    background-image: url('imagenes/fondo2.jpg');
     background-size: cover;  /* Hace que la imagen cubra toda la pantalla */
     background-position: center center;  /* Centra la imagen */
     background-attachment: fixed;  /* Mantiene la imagen fija cuando se hace scroll */
-    margin: 0;
-    padding: 0;
     height: 100vh;  /* Asegura que el body ocupe toda la altura de la pantalla */
     display: flex;
     justify-content: center;  /* Centra el contenedor horizontalmente */
@@ -29,8 +27,7 @@ body {
 /* Título del formulario */
 h1 {
     font-size: 2rem;
-    color: #000000;
-    margin-bottom: 20px;
+    color: #ffffff;
 }
 
 
@@ -44,22 +41,21 @@ form {
 label {
     font-size: 20px;
     margin-bottom: 8px;
-    color: #000000;
+    color: #ffffff;
 }
 
 /* Estilos de los inputs */
 input[type="text"], input[type="date"], select {
     padding: 12px;
-    font-size: 1rem;
+    font-size: 20px;
     margin-bottom: 20px;
     border: 2px solid #ddd;
     border-radius: 30px;
     outline: none;
     transition: all 0.3s ease;
-    field-sizing: content;
+
 }
 
-/* Estilo para el focus de los inputs */
 input[type="text"]:focus, input[type="date"]:focus, select:focus {
     border-color: #3498db;
     box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
@@ -95,3 +91,4 @@ p a {
 p a:hover {
     text-decoration: underline;
 }
+

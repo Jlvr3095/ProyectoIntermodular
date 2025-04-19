@@ -8,7 +8,7 @@
 <html>
 <head>
     <title><%= isEdit ? "Editar Producto" : "Nuevo producto" %></title>
-    <link rel="stylesheet" href="NewEditEvento.css">
+    <link rel="stylesheet" href="addProduct.css">
 </head>
 <body>
 <div class="container">

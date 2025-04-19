@@ -1,29 +1,23 @@
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f4f6f8;
-    margin: 0;
-    padding: 0;
+    font-family: 'Playfair Display', serif;
+    background: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    text-align:center;
 }
 
 /* Estilos del contenedor del formulario */
 .container {
-    background: #fff;
-    padding: 30px 40px;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    background: #ffffff;
     width: 100%;
     max-width: 500px;
 }
 
 /* Título del formulario */
 h1 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 25px;
+    color: #020202;
 }
 
 /* Estilos de los párrafos dentro del formulario */
@@ -33,10 +27,11 @@ form p {
 
 /* Estilos de las etiquetas (labels) */
 label {
+
     display: block;
     font-weight: bold;
-    color: #444;
-    margin-bottom: 6px;
+    color: #070707;
+    font-size: 20px
 }
 
 /* Estilos para los inputs de texto, correo y contraseña */
@@ -44,46 +39,23 @@ input[type="text"], input[type="email"], input[type="password"] {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 30px;
     box-sizing: border-box;
-    transition: border-color 0.3s;
+    text-align: center;
 }
 
-/* Estilo cuando el input tiene foco (selección) */
-input:focus {
-    border-color: #007bff;
-    outline: none;
-}
-
-/* Estilos del botón de guardar */
 button {
-    width: 100%;
+    width: 30%;
     background-color: #007bff;
     color: #fff;
     border: none;
     padding: 12px;
-    border-radius: 5px;
+    border-radius:20px;
     font-size: 16px;
     cursor: pointer;
     transition: background 0.3s;
 }
 
-/* Efecto hover en el botón */
 button:hover {
     background-color: #0056b3;
-}
-
-/* Estilos para el enlace de regreso */
-a {
-    display: block;
-    text-align: center;
-    margin-top: 15px;
-    color: #007bff;
-    text-decoration: none;
-    font-size: 14px;
-}
-
-/* Efecto hover en el enlace */
-a:hover {
-    text-decoration: underline;
 }

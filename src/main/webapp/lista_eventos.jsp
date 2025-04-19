@@ -6,14 +6,13 @@
 <html>
 <head>
     <link rel="stylesheet" href="admin.css">
-    <title>Listado de Eventos</title>
+    <title>Pagina de administrador</title>
 </head>
 <body>
-<h1>Bienvenido, ${sessionScope.nombre}</h1>
-
+<h1>Bienvenid@, ${sessionScope.nombre}</h1>
 <div class="container">
+    <h2> Lista de usuarios registrados</h2>
     <table border="1">
-        <thead>
         <tr>
             <th>ID</th>
             <th>Nombre</th>
@@ -21,10 +20,8 @@
             <th>Rol</th>
             <th>Acciones</th>
         </tr>
-        </thead>
         <tbody>
         <%
-            // Obtener lista de usuarios
             List<Usuario> usuarios = (List<Usuario>) request.getAttribute("listaUsuarios");
             if (usuarios != null) {
                 for (Usuario usuario : usuarios) {
@@ -35,8 +32,7 @@
             <td><%= usuario.getEmail() %></td>
             <td><%= usuario.getRol() %></td>
             <td>
-                <a href="usuario?action=edit&id=<%= usuario.getId_usuario() %>">Editar</a>
-                <a href="usuario?action=delete&id=<%= usuario.getId_usuario() %>" onclick="return confirm('¿Seguro que quieres eliminar este usuario?')">Eliminar</a>
+                <a href="usuario?action=edit&id=<%= usuario.getId_usuario() %>">Editar Usuario</a>
             </td>
         </tr>
         <%
@@ -47,10 +43,10 @@
     </table>
 </div>
 <div class="container">
-    <h2>Lista de eventos creados</h2>
-    <table>
+    <h3>Lista de eventos creados</h3>
+    <table border="1">
         <tr>
-            <th>Nombre</th>
+            <th>Nombre del evento</th>
             <th>Fecha del evento</th>
             <th>Lugar del evento</th>
             <th>ID del usuario</th>
@@ -75,8 +71,8 @@
     </table>
 </div>
 <div class="container">
-    <h2>Productos disponibles para eventos</h2>
-    <table>
+    <h4>Productos disponibles para eventos</h4>
+    <table border="1">
         <tr>
             <th>Nombre producto</th>
             <th>Descripcion</th>
