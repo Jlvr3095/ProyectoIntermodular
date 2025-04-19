@@ -1,0 +1,86 @@
+body {
+    font-family: 'Playfair Display', serif;
+    background-image: url('imagenes/fondo1.jpg');
+    background-size: cover;
+    background-position:  center center;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #333;
+}
+
+.login-container {
+    background-color: rgba(255, 255, 255, 0.5);  /* Blanco con 50% de transparencia */
+    color: black;  /* El texto sigue siendo opaco */
+    padding: 20px;
+    border-radius: 10px;
+    /*background-color: #fff;*/
+    /*padding: 50px;*/
+    /*border-radius: 20px;*/
+    /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
+    /*width: 100%;*/
+    /*max-width: 500px;*/
+}
+
+h1 {
+    font-size: 35px;
+    text-align: center;
+    color: #000000;
+    margin-bottom: 20px;
+}
+
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #000000;
+    outline: none;
+}
+
+input[type="submit"] {
+    background-color: #eb9a4b;
+    color: #000000;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 24px;
+    width: 100%;
+}
+
+input[type="submit"]:hover {
+    background-color: #eb9a4b;
+}
+
+.registro {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    font-size: 25px;
+}
+
+.registro a {
+    color: #eb9a4b;
+    text-decoration: none;
+}
+
+.registro a:hover {
+    text-decoration: underline;
+}
+
+.registro a:hover {
+    text-decoration: underline;
+}

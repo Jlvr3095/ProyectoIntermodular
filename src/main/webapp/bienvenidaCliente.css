@@ -1,0 +1,118 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Body */
+body {
+    background-image: url('imagenes/evento.jpg');
+    background-size: cover;  /* Hace que la imagen cubra toda la pantalla */
+    background-position: center center;  /* Centra la imagen */
+    background-attachment: fixed;  /* Mantiene la imagen fija cuando se hace scroll */
+    line-height: 1.6;
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    padding-top: 20px;
+}
+
+/* Contenedor Principal */
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+/* Encabezados */
+h1 {
+    text-align: center;
+    color: #000000;
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+h2{
+    text-align: center;
+    color: #000000;
+}
+
+/* Tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #eb9a4b;
+    color: #000000;
+}
+
+td {
+    background-color: #ecf0f1;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Acciones y Links */
+a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Estilo para los botones dentro de la tabla */
+td a {
+    margin-right: 10px;
+}
+
+td a:last-child {
+    margin-right: 0;
+}
+
+/* Lista de Productos */
+ul {
+    list-style-type: none;
+}
+
+ul li {
+    padding: 5px 0;
+}
+
+ul li a {
+    color: #e74c3c;
+    font-size: 0.9em;
+    margin-left: 10px;
+}
+
+ul li a:hover {
+    color: #c0392b;
+}
+
+/* Párrafo de Crear Evento */
+p {
+    text-align: center;
+    margin-top: 20px;
+}
+
+p a {
+    color: #3498db;
+    font-weight: bold;
+}
+
+p a:hover {
+    text-decoration: underline;
+}
