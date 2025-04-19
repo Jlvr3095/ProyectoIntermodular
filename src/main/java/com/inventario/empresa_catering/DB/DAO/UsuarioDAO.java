@@ -73,7 +73,7 @@ public class UsuarioDAO {
 
     public boolean UpdateUsuario(Usuario Usuario) throws SQLException {
         String query = "UPDATE usuarios SET nombre = ?, apellidos = ?, email = ?, rol = ?, password = ? WHERE id_usuario = ?";
-
+        String passwordHash = BCrypt.hashpw(Usuario.getPassword(), BCrypt.gensalt());
         Connection conn = DataBaseConnector.GetInstance().GetConnection();
         PreparedStatement ps = conn.prepareStatement(query);
 
@@ -81,7 +81,7 @@ public class UsuarioDAO {
         ps.setString(2, Usuario.getApellidos());
         ps.setString(3, Usuario.getEmail());
         ps.setString(4, Usuario.getRol());
-        ps.setString(5, Usuario.getPassword());
+        ps.setString(5, passwordHash);
         ps.setInt(6, Usuario.getId_usuario());
         int rows = ps.executeUpdate();
         return rows > 0;
