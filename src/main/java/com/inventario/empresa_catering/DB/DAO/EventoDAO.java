@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class EventoDAO {
     // Metodo para obtener todos los eventos registrados en la base de datos
-    public ArrayList<Evento> GetAllEventos() throws SQLException {
+    public ArrayList<Evento> getAllEventos() throws SQLException {
 
         ArrayList<Evento> evens = new ArrayList<>();
 
@@ -34,7 +34,7 @@ public class EventoDAO {
         return evens;
     }
     // Metodo para obtener los eventos registrados en la base de datos por ID usuario
-    public ArrayList<Evento> GetEventosByUsuario(int idUsuario) throws SQLException {
+    public ArrayList<Evento> getEventosByUsuario(int idUsuario) throws SQLException {
 
         ArrayList<Evento> evens = new ArrayList<>();
 
@@ -59,7 +59,7 @@ public class EventoDAO {
         return evens;
     }
     // Metodo para obtener un evento por su ID
-    public Evento GetEventoById(int id) throws SQLException {
+    public Evento getEventoById(int id) throws SQLException {
 
         Evento even = null;
         String query = "SELECT id_evento, nombre_evento, fecha_evento, lugar_evento, id_usuario FROM eventos WHERE id_evento = ?";
@@ -81,7 +81,7 @@ public class EventoDAO {
         return even;
     }
     // Metodo para añadir un nuevo evento
-    public boolean AddEvento(Evento Evento) throws SQLException {
+    public boolean addEvento(Evento Evento) throws SQLException {
 
         String query = "INSERT INTO Eventos (nombre_evento, fecha_evento, lugar_evento, id_usuario) VALUES (?, ?, ?,?)";
 
@@ -97,7 +97,7 @@ public class EventoDAO {
         return rows > 0;
     }
     // Metodo para editar/actualizar un evento
-    public boolean UpdateEvento(Evento Evento) throws SQLException {
+    public boolean updateEvento(Evento Evento) throws SQLException {
 
         String query = "UPDATE Eventos SET nombre_evento = ?, fecha_evento = ?, lugar_evento = ?, id_usuario = ? WHERE id_evento = ?";
 
@@ -114,7 +114,7 @@ public class EventoDAO {
         return rows > 0;
     }
     // Metodo para eliminar un evento por su ID
-    public boolean DeleteEvento(int id) throws SQLException {
+    public boolean deleteEvento(int id) throws SQLException {
 
         String query = "DELETE FROM eventos WHERE id_evento = ?";
 

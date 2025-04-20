@@ -44,8 +44,6 @@ public class EventoProductoController extends HttpServlet {
                 listProductosByEvento(request, response);
                 break;
             default:
-                showProductList(request, response);
-                break;
         }
     }
 
@@ -69,7 +67,7 @@ public class EventoProductoController extends HttpServlet {
         List<Producto> productos = null;
 
         try {
-            productos = productoDAO.GetAllProductos();
+            productos = productoDAO.getAllProductos();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -132,20 +130,20 @@ public class EventoProductoController extends HttpServlet {
         response.sendRedirect("evento?action=listCliente"); // Redirigir al listado de eventos para el cliente
     }
 
-    private void showProductList(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        List<Producto> productos = null;
-
-        try {
-            productos = productoDAO.GetAllProductos();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        request.setAttribute("productos", productos);
-
-        RequestDispatcher dispatcher = request.getRequestDispatcher("bienvenida-cliente.jsp");
-        dispatcher.forward(request, response);
-    }
+//    private void showProductList(HttpServletRequest request, HttpServletResponse response)
+//            throws ServletException, IOException {
+//
+//        List<Producto> productos = null;
+//
+//        try {
+//            productos = productoDAO.getAllProductos();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//
+//        request.setAttribute("productos", productos);
+//
+//        RequestDispatcher dispatcher = request.getRequestDispatcher("bienvenida-cliente.jsp");
+//        dispatcher.forward(request, response);
+//    }
 }
