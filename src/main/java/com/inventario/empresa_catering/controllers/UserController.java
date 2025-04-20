@@ -16,12 +16,14 @@ public class UserController extends HttpServlet {
     private UsuarioDAO usuarioDAO;
 
     @Override
+    // Creamos la instancia de Usuario DAO
     public void init() throws ServletException {
         super.init();
         usuarioDAO = new UsuarioDAO();
     }
 
     @Override
+    // Manejo de las solicitudes entrantes
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -47,6 +49,7 @@ public class UserController extends HttpServlet {
     }
 
     @Override
+    // Manejo de los solicitudes de envio
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -65,12 +68,14 @@ public class UserController extends HttpServlet {
         List<Usuario> usuarios = null;
 
         try {
-            usuarios = usuarioDAO.GetAllUsuarios();
+            // Llamamos al metodo del DAO para obtener todos los usuarios
+            usuarios = usuarioDAO.getAllUsuarios();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        // Guardamos la vista de todos los usuarios para llamarla en el JSP
         request.setAttribute("listaUsuarios", usuarios);
-
+        // Redirigimos al JSP para enseñar los datos
         RequestDispatcher dispatcher = request.getRequestDispatcher("lista_eventos.jsp");
         dispatcher.forward(request, response);
     }
@@ -89,7 +94,8 @@ public class UserController extends HttpServlet {
         Usuario usuario = null;
 
         try {
-            usuario = usuarioDAO.GetUsuarioById(idUsuario);
+            // Llamamos al metodo 
+            usuario = usuarioDAO.getUsuarioById(idUsuario);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -101,7 +107,7 @@ public class UserController extends HttpServlet {
     }
 
     private void saveUsuario(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws  IOException {
 
         String idParam = request.getParameter("id_usuario");
         String nombre = request.getParameter("nombre");
@@ -125,10 +131,10 @@ public class UserController extends HttpServlet {
 
         try {
             if (idUser == 0) {
-                usuarioDAO.AddUsuario(user);
+                usuarioDAO.addUsuario(user);
             } else {
                 user.setId_usuario(idUser);
-                usuarioDAO.UpdateUsuario(user);
+                usuarioDAO.updateUsuario(user);
             }
             user.setId_usuario(idUser);
         } catch (SQLException e) {
@@ -138,12 +144,12 @@ public class UserController extends HttpServlet {
     }
 
     private void deleteUsuario(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws  IOException {
 
         int idUsuario = Integer.parseInt(request.getParameter("id"));
 
         try {
-            usuarioDAO.DeleteUsuario(idUsuario);
+            usuarioDAO.deleteUsuario(idUsuario);
         } catch (SQLException e) {
             e.printStackTrace();
         }

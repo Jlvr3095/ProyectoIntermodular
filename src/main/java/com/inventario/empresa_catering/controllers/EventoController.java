@@ -90,7 +90,7 @@ public class EventoController extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("producto?action=listProduct");
         dispatcher.forward(request, response);
     }
-
+// Obtenemos los eventos y productos asociados a cada evento por id_usuario logeado
     private void listEventosCliente(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 

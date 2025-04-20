@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 
 public class EventoProductoDAO {
-
+    // Metodo para asociar un producto a un evento
     public boolean addProductoToEvento(int idProducto, int idEvento) throws SQLException {
 
         String query = "INSERT INTO evento_producto (id_evento, id_producto) VALUES (?, ?)";
@@ -24,7 +24,7 @@ public class EventoProductoDAO {
         int rows = ps.executeUpdate();
         return rows > 0;
     }
-
+    // Metodo para desasociar un producto de un evento
     public boolean removeProductoFromEvento( int idEvento, int idProducto) throws SQLException {
         String query = "DELETE FROM evento_producto WHERE id_evento = ? AND id_producto = ?";
 
@@ -36,7 +36,7 @@ public class EventoProductoDAO {
         int rows = ps.executeUpdate();
         return rows > 0;
     }
-
+    // Metodo para obtener productos por Evento
     public ArrayList<Producto> getProductosPorEvento(int idEvento) throws SQLException {
 
         ArrayList<Producto> productos = new ArrayList<>();
@@ -52,16 +52,16 @@ public class EventoProductoDAO {
 
             ps.setInt(1, idEvento);
 
-            ResultSet rsProductos = ps.executeQuery();
+            ResultSet rs = ps.executeQuery();
 
-            while (rsProductos.next()) {
+            while (rs.next()) {
 
                 Producto producto = new Producto();
-                producto.setId_producto(rsProductos.getInt("id_producto"));
-                producto.setNombre_producto(rsProductos.getString("nombre_producto"));
-                producto.setDescripcion(rsProductos.getString("descripcion"));
-                producto.setPrecio(rsProductos.getDouble("precio"));
-                producto.setStock(rsProductos.getInt("stock"));
+                producto.setId_producto(rs.getInt("id_producto"));
+                producto.setNombre_producto(rs.getString("nombre_producto"));
+                producto.setDescripcion(rs.getString("descripcion"));
+                producto.setPrecio(rs.getDouble("precio"));
+                producto.setStock(rs.getInt("stock"));
 
                 Evento evento = new Evento();
                 evento.setId_evento(idEvento);
