@@ -112,7 +112,7 @@ public class EventoController extends HttpServlet {
         // Gaurdamos la vista de los eventos asociados con el cliente y los productos asociados con cada evento
         request.setAttribute("eventos", eventosCliente);
         // Redirigimos a la pagina del cliente
-        RequestDispatcher dispatcher = request.getRequestDispatcher("bienvenida-cliente.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("cliente.jsp");
         dispatcher.forward(request, response);
     }
 

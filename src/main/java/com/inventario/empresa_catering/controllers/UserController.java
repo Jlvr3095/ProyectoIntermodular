@@ -76,7 +76,7 @@ public class UserController extends HttpServlet {
         // Guardamos la vista de todos los usuarios para llamarla en el JSP
         request.setAttribute("listaUsuarios", usuarios);
         // Redirigimos al JSP para enseñar los datos
-        RequestDispatcher dispatcher = request.getRequestDispatcher("lista_eventos.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("admin.jsp");
         dispatcher.forward(request, response);
     }
 

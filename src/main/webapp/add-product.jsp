@@ -6,19 +6,7 @@
 
     <title>Añadir Producto al Evento</title>
     <link rel="stylesheet" href="addProduct.css">
-    <script type="text/javascript">
-        function mostrarDetallesProducto() {
-
-            var select = document.getElementById("id_producto");
-            var productoSeleccionado = select.options[select.selectedIndex];
-
-            var descripcion = productoSeleccionado.getAttribute("data-descripcion");
-            var precio = productoSeleccionado.getAttribute("data-precio");
-
-            document.getElementById("descripcion").textContent = descripcion;
-            document.getElementById("precio").textContent = precio + " € " ;
-        }
-    </script>
+    <script src="addProduct.js"></script>
 </head>
 <body>
 <h1>Añadir Productos a Evento</h1>
