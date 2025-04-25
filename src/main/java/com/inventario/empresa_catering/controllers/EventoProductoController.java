@@ -20,13 +20,16 @@ public class EventoProductoController extends HttpServlet {
     private EventoProductoDAO eventoProductoDAO;
 
     @Override
+    // Obtenemos la instancia de productoDAO y eventoProductoDAO para poder llamar sus metodos
     public void init() throws ServletException {
+
         super.init();
         productoDAO = new ProductoDAO();
         eventoProductoDAO = new EventoProductoDAO(); // Inicializamos el DAO para gestionar la relación Producto-Evento
     }
 
     @Override
+    // Manejo de las solicitudes entrantes
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -40,117 +43,74 @@ public class EventoProductoController extends HttpServlet {
             case "delete":
                 deleteProductoFromEvento(request, response);
                 break;
-            case "listCliente":
-                listProductosByEvento(request, response);
-                break;
             default:
-                showProductList(request, response);
-                break;
         }
     }
 
     @Override
+    // Manejo de las solicitudes de envío
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws IOException {
 
         String action = request.getParameter("action");
 
-        if (action == null) action = "add"; // Default action to "add"
+        if (action == null) action = "add";
 
         if ("add".equals(action)) {
             addProductoToEvento(request, response);
         }
     }
 
-    // Mostrar formulario para agregar productos a un evento
     private void showAddForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        // Obtenemos el ID del evento
         Integer id_evento = Integer.parseInt(request.getParameter("id_evento"));
         List<Producto> productos = null;
 
         try {
-            productos = productoDAO.GetAllProductos();
+            // Llamamos al metodo del producto DAO para obtener todos los productos de la base de datos
+            productos = productoDAO.getAllProductos();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        // Guardamos la vista del id del evento selecionado y todos los productos disponibles
         request.setAttribute("productos", productos);
         request.setAttribute("id_evento", id_evento);
-
+        // Redirigimos a la página para añadir un producto a un evento
         RequestDispatcher dispatcher = request.getRequestDispatcher("add-product.jsp");
         dispatcher.forward(request, response);
     }
 
-    // Listar productos asociados a un evento
-    private void listProductosByEvento(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        Integer id_evento = Integer.parseInt(request.getParameter("id_evento"));
-        List<Producto> productosEvento = null;
-
-        try {
-            productosEvento = eventoProductoDAO.getProductosPorEvento(id_evento);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        request.setAttribute("productosEvento", productosEvento);
-        request.setAttribute("id_evento", id_evento);
-
-        RequestDispatcher dispatcher = request.getRequestDispatcher("event-product-list.jsp");
-        dispatcher.forward(request, response);
-    }
-
-    // Agregar un producto a un evento
     private void addProductoToEvento(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
-
+        // Obtenemos el id del evento y el id del producto
         int idEvento = Integer.parseInt(request.getParameter("id_evento"));
         int idProducto = Integer.parseInt(request.getParameter("id_producto"));
 
         try {
+            // Llamamos al metodo del eventoProducto DAO para asociar un producto a un evento
             eventoProductoDAO.addProductoToEvento(idProducto, idEvento);
         } catch (SQLException e) {
             e.printStackTrace();
-            response.sendRedirect("error.jsp");
-            return;
         }
-
-        response.sendRedirect("evento?action=listCliente"); // Redirigir al listado de eventos para el cliente
+        // Redirigimos a la pagina del list cliente para recuperar los datos y que posteriormente nos redirija a la pagina principal del cliente
+        response.sendRedirect("evento?action=listCliente");
     }
 
-    // Eliminar un producto de un evento
     private void deleteProductoFromEvento(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
-
+        //  Obtenemos el id del evento y el id del producto
         int idEvento = Integer.parseInt(request.getParameter("id_evento"));
         int idProducto = Integer.parseInt(request.getParameter("id_producto"));
 
         try {
+            // LLamamos al metodo del eventoProducto DAO para eliminar un producto asociado a un evento
             eventoProductoDAO.removeProductoFromEvento(idEvento, idProducto);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        response.sendRedirect("evento?action=listCliente"); // Redirigir al listado de eventos para el cliente
+        // Redirigimos a la pagina del list cliente para recuperar los datos y que posteriormente nos redirija a la pagina principal del cliente
+        response.sendRedirect("evento?action=listCliente");
     }
 
-    // Método para mostrar todos los productos
-    private void showProductList(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        List<Producto> productos = null;
-
-        try {
-            productos = productoDAO.GetAllProductos();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        request.setAttribute("productos", productos);
-
-        RequestDispatcher dispatcher = request.getRequestDispatcher("bienvenida-cliente.jsp");
-        dispatcher.forward(request, response);
-    }
 }

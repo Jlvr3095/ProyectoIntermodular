@@ -16,12 +16,14 @@ public class UserController extends HttpServlet {
     private UsuarioDAO usuarioDAO;
 
     @Override
+    // Creamos la instancia de Usuario DAO para poder llamar a todos sus metodos
     public void init() throws ServletException {
         super.init();
         usuarioDAO = new UsuarioDAO();
     }
 
     @Override
+    // Manejo de las solicitudes entrantes
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -47,6 +49,7 @@ public class UserController extends HttpServlet {
     }
 
     @Override
+    // Manejo de los solicitudes de envio
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -65,12 +68,15 @@ public class UserController extends HttpServlet {
         List<Usuario> usuarios = null;
 
         try {
-            usuarios = usuarioDAO.GetAllUsuarios();
+            // Llamamos al metodo del DAO para obtener todos los usuarios
+            usuarios = usuarioDAO.getAllUsuarios();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        // Guardamos la vista de todos los usuarios para llamarla en el JSP
         request.setAttribute("listaUsuarios", usuarios);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("lista_eventos.jsp");
+        // Redirigimos al JSP para enseñar los datos
+        RequestDispatcher dispatcher = request.getRequestDispatcher("admin.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -83,24 +89,26 @@ public class UserController extends HttpServlet {
 
     private void editUsuario(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        // Obtenemos el ID del usuario a editar
         int idUsuario = Integer.parseInt(request.getParameter("id"));
         Usuario usuario = null;
 
         try {
-            usuario = usuarioDAO.GetUsuarioById(idUsuario);
+            // Llamamos al metodo para obtener el usuario por su ID
+            usuario = usuarioDAO.getUsuarioById(idUsuario);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        // Guardamos la vista para enseñar los datos del usuario que estamos editando
         request.setAttribute("usuario", usuario);
+        // Redirigimos al JSP para que se pueda editar
         RequestDispatcher dispatcher = request.getRequestDispatcher("RegistroEdicion.jsp");
         dispatcher.forward(request, response);
 
     }
 
     private void saveUsuario(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws  IOException {
 
         String idParam = request.getParameter("id_usuario");
         String nombre = request.getParameter("nombre");
@@ -108,13 +116,13 @@ public class UserController extends HttpServlet {
         String email = request.getParameter("email");
         String rol = request.getParameter("rol");
         String password = request.getParameter("password");
-
+        // Si el campo rol esta vacio le asignamos por defecto el rol cliente
         if (rol == null || rol.isEmpty()) {
             rol = "cliente";
         }
 
         int idUser = (idParam == null || idParam.isEmpty()) ? 0 : Integer.parseInt(idParam);
-
+        // Crea un usuario nuevo con los datos recibidos
         Usuario user = new Usuario();
         user.setNombre(nombre);
         user.setApellidos(apellidos);
@@ -123,31 +131,35 @@ public class UserController extends HttpServlet {
         user.setPassword(password);
 
         try {
+
             if (idUser == 0) {
-                usuarioDAO.AddUsuario(user);
+                // Llamamos al metodo del DAO para crear un usuario en la base de datos
+                usuarioDAO.addUsuario(user);
             } else {
                 user.setId_usuario(idUser);
-                usuarioDAO.UpdateUsuario(user);
+                usuarioDAO.updateUsuario(user);
             }
             user.setId_usuario(idUser);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        // Cuando cree el usuario, lo redirigimos a la pagina de iniciar sesion
         response.sendRedirect("index.jsp");
     }
 
     private void deleteUsuario(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws  IOException {
 
         int idUsuario = Integer.parseInt(request.getParameter("id"));
 
         try {
-            usuarioDAO.DeleteUsuario(idUsuario);
+            // Llamamos al metodo del DAO para eliminar un usuario
+            usuarioDAO.deleteUsuario(idUsuario);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        response.sendRedirect("usuario?action=list");
+        // Redidirigimos a la pagina principal del administrador
+        response.sendRedirect("evento?action=list");
     }
 }
 

@@ -1,0 +1,106 @@
+body {
+    background-image: url('imagenes/evento.jpg');
+    background-size: cover;  /* Hace que la imagen cubra toda la pantalla */
+    background-position: center center;  /* Centra la imagen */
+    background-attachment: fixed;  /* Mantiene la imagen fija cuando se hace scroll */
+    font-size: 16px;
+    padding-top: 20px;
+}
+
+/* Contenedor Principal */
+.container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #baaa9d;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #ffffff;
+    font-size: 60px;
+
+}
+h2{
+    text-align: center;
+    color: #000000;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #91775f;
+    color: #000000;
+    text-align: center
+}
+
+td {
+    text-align:center;
+    background-color: #ecf0f1;
+}
+
+/* Acciones y Links */
+a {
+    color: #3d5c71;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+td a {
+    margin-right: 10px;
+}
+
+td a:last-child {
+    margin-right: 0;
+}
+
+/* Lista de Productos */
+ul {
+    list-style-type: none;
+}
+
+ul li {
+    padding: 5px 0;
+}
+
+ul li a {
+    color: #e74c3c;
+    font-size: 0.9em;
+    margin-left: 10px;
+}
+
+ul li a:hover {
+    color: #c0392b;
+}
+
+/* Párrafo de Crear Evento */
+p {
+    text-align: center;
+    margin-top: 20px;
+}
+
+p a {
+    color: #fdfeff;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+p a:hover {
+    text-decoration: underline;
+}

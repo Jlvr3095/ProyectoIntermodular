@@ -1,4 +1,5 @@
 package com.inventario.empresa_catering.DB.DAO;
+
 import com.inventario.empresa_catering.DB.DataBaseConnector;
 import com.inventario.empresa_catering.models.Evento;
 import java.sql.Connection;
@@ -9,10 +10,8 @@ import java.util.ArrayList;
 
 
 public class EventoDAO {
-
-    Connection conn = DataBaseConnector.GetInstance().GetConnection();
-
-    public ArrayList<Evento> GetAllEventos() throws SQLException {
+    // Metodo para obtener todos los eventos registrados en la base de datos
+    public ArrayList<Evento> getAllEventos() throws SQLException {
 
         ArrayList<Evento> evens = new ArrayList<>();
 
@@ -34,8 +33,8 @@ public class EventoDAO {
         }
         return evens;
     }
-
-    public ArrayList<Evento> GetEventosByUsuario(int idUsuario) throws SQLException {
+    // Metodo para obtener los eventos registrados en la base de datos por ID usuario
+    public ArrayList<Evento> getEventosByUsuario(int idUsuario) throws SQLException {
 
         ArrayList<Evento> evens = new ArrayList<>();
 
@@ -59,8 +58,8 @@ public class EventoDAO {
         }
         return evens;
     }
-
-    public Evento GetEventoById(int id) throws SQLException {
+    // Metodo para obtener un evento por su ID
+    public Evento getEventoById(int id) throws SQLException {
 
         Evento even = null;
         String query = "SELECT id_evento, nombre_evento, fecha_evento, lugar_evento, id_usuario FROM eventos WHERE id_evento = ?";
@@ -81,12 +80,12 @@ public class EventoDAO {
         }
         return even;
     }
-
-    public boolean AddEvento(Evento Evento) throws SQLException {
+    // Metodo para añadir un nuevo evento
+    public boolean addEvento(Evento Evento) throws SQLException {
 
         String query = "INSERT INTO Eventos (nombre_evento, fecha_evento, lugar_evento, id_usuario) VALUES (?, ?, ?,?)";
 
-        conn = DataBaseConnector.GetInstance().GetConnection();
+        Connection conn = DataBaseConnector.GetInstance().GetConnection();
         PreparedStatement ps = conn.prepareStatement(query);
 
         ps.setString(1, Evento.getNombre_evento());
@@ -97,8 +96,8 @@ public class EventoDAO {
         int rows = ps.executeUpdate();
         return rows > 0;
     }
-
-    public boolean UpdateEvento(Evento Evento) throws SQLException {
+    // Metodo para editar/actualizar un evento
+    public boolean updateEvento(Evento Evento) throws SQLException {
 
         String query = "UPDATE Eventos SET nombre_evento = ?, fecha_evento = ?, lugar_evento = ?, id_usuario = ? WHERE id_evento = ?";
 
@@ -114,8 +113,8 @@ public class EventoDAO {
         int rows = ps.executeUpdate();
         return rows > 0;
     }
-
-    public boolean DeleteEvento(int id) throws SQLException {
+    // Metodo para eliminar un evento por su ID
+    public boolean deleteEvento(int id) throws SQLException {
 
         String query = "DELETE FROM eventos WHERE id_evento = ?";
 

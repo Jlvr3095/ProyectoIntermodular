@@ -19,25 +19,20 @@ import java.util.List;
 public class EventoController extends HttpServlet {
     private EventoDAO eventoDAO;
     private EventoProductoDAO eventoProductoDAO;
+
     @Override
+    // Creamos la instancia del evento DAO y el eventoProducto DAO para poder llamar a sus metodos
     public void init() throws ServletException {
+
         super.init();
         eventoDAO = new EventoDAO();
         eventoProductoDAO = new EventoProductoDAO();
     }
 
     @Override
+    // Manejo de las solicitudes entrantes
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        HttpSession session = request.getSession(false);
-
-        if (session == null || session.getAttribute("id_usuario") == null) {
-
-            response.sendRedirect("evento-form.jsp");
-            // Redirigir al login si no está autenticado
-            return;
-        }
 
         String action = request.getParameter("action");
 
@@ -63,8 +58,9 @@ public class EventoController extends HttpServlet {
     }
 
     @Override
+    // Manejo de las solicitudes de envío
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws IOException {
 
         String action = request.getParameter("action");
 
@@ -81,12 +77,14 @@ public class EventoController extends HttpServlet {
         List<Evento> eventos = null;
 
         try {
-            eventos = eventoDAO.GetAllEventos();
+            // Llamamos al metodo de eventoDAO para obetner la lista de eventos de la base de datos
+            eventos = eventoDAO.getAllEventos();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        //Guardamos la vista de la lista de eventos para poder usarla en el JSP
         request.setAttribute("listaEventos", eventos);
-
+        // Redirigimos a la lista de productos que a su vez nos dirige a la lista de usuarios y posteriormente al JSP del administrador
         RequestDispatcher dispatcher = request.getRequestDispatcher("producto?action=listProduct");
         dispatcher.forward(request, response);
     }
@@ -100,38 +98,44 @@ public class EventoController extends HttpServlet {
         List<Producto> productosPorEvento = null;
 
         try {
-            eventosCliente = eventoDAO.GetEventosByUsuario(id_usuario);
+            // Llamamos al metodo de evento DAO y obtenemos todos los eventos por usuario
+            eventosCliente = eventoDAO.getEventosByUsuario(id_usuario);
+            // Recorremos los eventos que tenga el usuario
             for (Evento evento : eventosCliente) {
+                // Llamamos al metodo de eventoProducto DAO para que obtener los productos por el ID del evento
                 productosPorEvento = eventoProductoDAO.getProductosPorEvento(evento.getId_evento());
                 evento.setProductos(productosPorEvento);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        // Gaurdamos la vista de los eventos asociados con el cliente y los productos asociados con cada evento
         request.setAttribute("eventos", eventosCliente);
-
-        RequestDispatcher dispatcher = request.getRequestDispatcher("bienvenida-cliente.jsp");
+        // Redirigimos a la pagina del cliente
+        RequestDispatcher dispatcher = request.getRequestDispatcher("cliente.jsp");
         dispatcher.forward(request, response);
     }
 
     private void showNewForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        // Redirigimos al formulario para crear un evento nuevo
         RequestDispatcher dispatcher = request.getRequestDispatcher("evento-form.jsp");
         dispatcher.forward(request, response);
     }
-
+    // No se usa ya que el administrador no tiene la opcion de editar un evento, pero lo dejo por si se necesita mas adelante
     private void editEventos(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        // Obtenemos el id del evento que vamos a editar
         int idEvento = Integer.parseInt(request.getParameter("idEvento"));
         Evento evento = null;
 
         try {
-            evento = eventoDAO.GetEventoById(idEvento);
+            // LLamamos al metodo del evento DAO que nos permite editar un evento existente
+            evento = eventoDAO.getEventoById(idEvento);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        // Guardamos la vista para poder usarlo en el JSP y nos de los datos del evento existente
         request.setAttribute("evento", evento);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("evento-form.jsp");
@@ -146,6 +150,7 @@ public class EventoController extends HttpServlet {
         String fecha_evento = request.getParameter("fecha_evento");
         String lugar_evento = request.getParameter("lugar_evento");
         Integer id_usuario = (Integer) request.getSession().getAttribute("id_usuario");
+        // Guardamos el rol del usuario que tenga la sesion iniciada
         String rol = (String) request.getSession().getAttribute("rol");
 
         int idEven = (idParam == null || idParam.isEmpty()) ? 0 : Integer.parseInt(idParam);
@@ -159,14 +164,15 @@ public class EventoController extends HttpServlet {
 
         try{
             if (idEven == 0) {
-                eventoDAO.AddEvento(even);
+                eventoDAO.addEvento(even);
             } else {
                 even.setId_evento(idEven);
-                eventoDAO.UpdateEvento(even);
+                eventoDAO.updateEvento(even);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        // Dependiendo del rol lo enviamos a una página o a otra
         if ("administrador".equals(rol)) {
             response.sendRedirect("evento?action=list");
         }
@@ -177,16 +183,20 @@ public class EventoController extends HttpServlet {
     }
 
     private void deleteEvento(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws  IOException {
 
         int idEvento = Integer.parseInt(request.getParameter("id"));
+        // Guardamos el rol del usuario que tenga la sesion iniciada
         String rol = (String) request.getSession().getAttribute("rol");
 
         try {
-            eventoDAO.DeleteEvento(idEvento);
+            // LLamamos al metodo del evento DAO para eliminar un evento registrado en la base de datos
+            eventoDAO.deleteEvento(idEvento);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        // Dependiendo del rol enviamos a una página o a otra
         if ("administrador".equals(rol)) {
             response.sendRedirect("evento?action=list");
         }
