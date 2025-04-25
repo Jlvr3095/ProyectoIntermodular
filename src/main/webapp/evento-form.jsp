@@ -1,19 +1,18 @@
 <%@ page import="com.inventario.empresa_catering.models.Evento" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    // Obtenemos el objeto "inventario" si existe
     Evento evento = (Evento) request.getAttribute("evento");
     boolean isEdit = (evento != null); // Si no es nulo, es edición
 %>
 
 <html>
 <head>
-    <title><%= isEdit ? "Editar Evento" : "Nuevo Evento" %></title>
-    <link rel="stylesheet" href="NewEditEvento.css">
+    <title><%= isEdit ? "Editar evento" : "Nuevo evento" %></title>
+    <link rel="stylesheet" href="evento.css">
 </head>
 <body>
 <div class="container">
-    <h1><%= isEdit ? "Editar Evento" : "Nuevo Evento" %></h1>
+    <h1><%= isEdit ? "Editar evento" : "Nuevo evento" %></h1>
 
     <form action="evento" method="post">
         <input type="hidden" name="action" value="save" />
@@ -23,17 +22,17 @@
         <% } %>
 
         <p>
-            <label>Nombre:</label><br />
+            <label>Nombre del evento</label><br />
             <input type="text" name="nombre_evento"
                    value="<%= isEdit ? evento.getNombre_evento() : "" %>" required />
         </p>
         <p>
-            <label>Fecha del evento:</label><br />
+            <label>Fecha del evento</label><br />
             <input type="date" name="fecha_evento"
-                value=" <%= isEdit ? evento.getFecha_evento() : "" %>" required />
+                value="<%= isEdit ? evento.getFecha_evento() : "" %>" required />
         </p>
         <p>
-            <label>Lugar del evento:</label><br/>
+            <label>Lugar del evento</label><br/>
             <select name="lugar_evento" required>
                 <option value="Finca Los Aromas"
                         <%= (isEdit && "Finca Los Aromas".equals(evento.getLugar_evento())) ? "selected" : "" %>>
@@ -49,6 +48,7 @@
 
         <button type="submit">Guardar</button>
     </form>
+    <p><a href="evento?action=listCliente">Regresar a tus eventos</a></p>
 </div>
 </body>
 </html>

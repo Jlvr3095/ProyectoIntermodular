@@ -10,8 +10,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class UsuarioDAO {
-
-    public ArrayList<Usuario> GetAllUsuarios() throws SQLException {
+    // Metodo para obtener todos los usuarios registrados en la base de datos
+    public ArrayList<Usuario> getAllUsuarios() throws SQLException {
         ArrayList<Usuario> users = new ArrayList<>();
 
         String query = "SELECT * FROM Usuarios";
@@ -32,7 +32,8 @@ public class UsuarioDAO {
         }
         return users;
     }
-    public Usuario GetUsuarioById(int id) throws SQLException {
+    // Metodo para obtener un usuario por su ID
+    public Usuario getUsuarioById(int id) throws SQLException {
         Usuario user = null;
         String query = "SELECT id_usuario, nombre, apellidos, email, rol, password FROM usuarios WHERE id_usuario = ?";
 
@@ -52,7 +53,8 @@ public class UsuarioDAO {
         }
         return user;
     }
-    public boolean AddUsuario(Usuario Usuario) throws SQLException {
+    // Metodo para añadir un usuario nuevo
+    public boolean addUsuario(Usuario Usuario) throws SQLException {
         String passwordHash = BCrypt.hashpw(Usuario.getPassword(), BCrypt.gensalt());
         String query = "INSERT INTO Usuarios (nombre, apellidos, email, rol, password) VALUES (?, ?, ?, ?, ?)";
 
@@ -68,9 +70,10 @@ public class UsuarioDAO {
         int rows = ps.executeUpdate();
         return rows > 0;
     }
-    public boolean UpdateUsuario(Usuario Usuario) throws SQLException {
+    // Metodo para editar un usuario
+    public boolean updateUsuario(Usuario Usuario) throws SQLException {
         String query = "UPDATE usuarios SET nombre = ?, apellidos = ?, email = ?, rol = ?, password = ? WHERE id_usuario = ?";
-
+        String passwordHash = BCrypt.hashpw(Usuario.getPassword(), BCrypt.gensalt());
         Connection conn = DataBaseConnector.GetInstance().GetConnection();
         PreparedStatement ps = conn.prepareStatement(query);
 
@@ -78,12 +81,13 @@ public class UsuarioDAO {
         ps.setString(2, Usuario.getApellidos());
         ps.setString(3, Usuario.getEmail());
         ps.setString(4, Usuario.getRol());
-        ps.setString(5, Usuario.getPassword());
+        ps.setString(5, passwordHash);
         ps.setInt(6, Usuario.getId_usuario());
         int rows = ps.executeUpdate();
         return rows > 0;
     }
-    public boolean DeleteUsuario(int id) throws SQLException {
+    // Metodo para eliminar un usuario por su ID
+    public boolean deleteUsuario(int id) throws SQLException {
 
         String query = "DELETE FROM usuarios WHERE id_usuario = ?";
 

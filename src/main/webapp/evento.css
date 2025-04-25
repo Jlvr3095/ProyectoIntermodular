@@ -1,0 +1,94 @@
+/* Estilos generales para el body */
+body {
+    font-family: 'Playfair Display', serif;
+    background-image: url('imagenes/fondo2.jpg');
+    background-size: cover;  /* Hace que la imagen cubra toda la pantalla */
+    background-position: center center;  /* Centra la imagen */
+    background-attachment: fixed;  /* Mantiene la imagen fija cuando se hace scroll */
+    height: 100vh;  /* Asegura que el body ocupe toda la altura de la pantalla */
+    display: flex;
+    justify-content: center;  /* Centra el contenedor horizontalmente */
+    align-items: center;  /* Centra el contenedor verticalmente */
+    color: #333;
+}
+
+/* Contenedor principal */
+.container {
+    /* Fondo blanco con 80% de opacidad para ver la imagen de fondo */
+    color: black;  /* El texto sigue siendo opaco */
+    padding: 30px;
+    border-radius: 10px;
+    width: 100%;  /* Hace que el contenedor ocupe el 100% del ancho disponible */
+    max-width: 600px;  /* Limita el ancho máximo del contenedor a 600px */
+    box-sizing: border-box;  /* Asegura que el padding no afecte al tamaño total del contenedor */
+    text-align: center;  /* Centra el contenido dentro del contenedor */
+}
+
+/* Título del formulario */
+h1 {
+    font-size: 2rem;
+    color: #ffffff;
+}
+
+
+/* Estilos para el formulario */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilos de los labels */
+label {
+    font-size: 20px;
+    margin-bottom: 8px;
+    color: #ffffff;
+}
+
+/* Estilos de los inputs */
+input[type="text"], input[type="date"], select {
+    padding: 12px;
+    font-size: 20px;
+    margin-bottom: 20px;
+    border: 2px solid #ddd;
+    border-radius: 30px;
+    outline: none;
+    transition: all 0.3s ease;
+
+}
+
+input[type="text"]:focus, input[type="date"]:focus, select:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+}
+
+/* Estilo para el botón de submit */
+button {
+    padding: 12px 25px;
+    font-size: 1.2rem;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;  /* Hace que el botón ocupe todo el ancho del formulario */
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+/* Enlace para regresar */
+p a {
+    font-size: 1rem;
+    color: #3498db;
+    text-decoration: none;
+    text-align: center;
+    display: block;
+    margin-top: 20px;
+}
+
+p a:hover {
+    text-decoration: underline;
+}
+

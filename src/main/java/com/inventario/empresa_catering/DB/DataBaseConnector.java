@@ -5,15 +5,14 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DataBaseConnector {
+
     private static DataBaseConnector instance = null;
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/empresa_eventos?autoReconnect=true&useSSL=false";
     private static final String USER = "root";
     private static final String PASSWORD = "Jlvr2024";
     private Connection connection;
 
-
     public DataBaseConnector(){
-
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -30,11 +29,11 @@ public class DataBaseConnector {
     }
 
     public static DataBaseConnector GetInstance(){
+
         if(instance == null){
             instance = new DataBaseConnector();
 
         }
-
         return instance;
     }
 

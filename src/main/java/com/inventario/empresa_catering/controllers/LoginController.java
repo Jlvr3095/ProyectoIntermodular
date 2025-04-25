@@ -1,4 +1,5 @@
 package com.inventario.empresa_catering.controllers;
+
 import com.inventario.empresa_catering.DB.DataBaseConnector;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -33,15 +34,15 @@ public class LoginController extends HttpServlet {
             if (rs.next()) {
 
                 if (BCrypt.checkpw(pass, rs.getString("password"))) {
-
+                    //Si la contraseña y el correo coinciden, obtenemos el rol, id y nombre del usuario logeado
                     String rol = rs.getString("rol");
                     int idUsuario = rs.getInt("id_usuario");
                     String nombre = rs.getString("nombre");
-
+                    //Guardamos  estos datos en la sesion iniciada
                     request.getSession().setAttribute("id_usuario", idUsuario);
                     request.getSession().setAttribute("nombre", nombre);
                     request.getSession().setAttribute("rol", rol);
-
+                    //Dependiendo del rol lo enviamos a una pagina o a otra
                     if ("administrador".equals(rol)) {
                         response.sendRedirect("evento?action=list");
                     } else if ("cliente".equals(rol)) {

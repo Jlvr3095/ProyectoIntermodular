@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ProductoDAO {
-    public ArrayList<Producto> GetAllProductos() throws SQLException {
+    public ArrayList<Producto> getAllProductos() throws SQLException {
 
         ArrayList<Producto> products = new ArrayList<>();
 
@@ -32,7 +32,7 @@ public class ProductoDAO {
         return products;
     }
 
-    public Producto GetProductoById(int id) throws SQLException {
+    public Producto getProductoById(int id) throws SQLException {
         Producto product = null;
         String query = "SELECT id_producto, nombre_producto, descripcion, precio, stock FROM productos WHERE id_producto = ?";
 
@@ -52,7 +52,7 @@ public class ProductoDAO {
         return product;
     }
 
-    public boolean AddProducto (Producto Producto) throws SQLException {
+    public boolean addProducto (Producto Producto) throws SQLException {
 
         String query = "INSERT INTO Productos (nombre_producto, descripcion, precio, stock) VALUES (?, ?, ?, ?)";
 
@@ -68,7 +68,7 @@ public class ProductoDAO {
         return rows > 0;
     }
 
-    public boolean UpdateProdcuto(Producto Producto) throws SQLException {
+    public boolean updateProdcuto(Producto Producto) throws SQLException {
 
         String query = "UPDATE Productos SET nombre_producto = ?, descripcion = ?, precio = ?, stock = ? WHERE id_producto = ?";
 
@@ -83,7 +83,7 @@ public class ProductoDAO {
         return rows > 0;
     }
 
-    public boolean DeleteProdcuto(int id) throws SQLException {
+    public boolean deleteProdcuto(int id) throws SQLException {
 
         String query = "DELETE FROM Productos WHERE id_producto = ?";
 
